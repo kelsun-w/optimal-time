@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">OptimalTime</string>
+
+    <string name="title_dashboard">Task</string>
+    <string name="title_timer">Timer</string>
+    <string name="title_stats">Statistics</string>
+    <string name="title_settings">Settings</string>
+
+    <string name="addNewTaskPlaceHolder">Add new task...</string>
+
+    <string name="timer_intervals_setting">Interval Lengths</string>
+    <string name="pref_length_work">Work Duration</string>
+    <string name="pref_length_Sbreak">Short Break</string>
+    <string name ="pref_work_before_Lbreak">Work Before Long Break</string>
+    <string name="pref_length_Lbreak">Long Break</string>
+    <string name="pref_Lbreak_after">Long Break After</string>
+
+</resources>

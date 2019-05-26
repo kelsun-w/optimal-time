@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_entries_work_length">
+        <item>01 minute</item>
+        <item>25 minutes</item>
+        <item>35 minutes</item>
+        <item>45 minutes</item>
+        <item>60 minutes</item>
+    </string-array>
+
+    <string-array name="pref_entries_sbreak_length">
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+    </string-array>
+
+    <string-array name="pref_entries_lbreak_length">
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>20 minutes</item>
+    </string-array>
+    <string-array name="pref_entries_workbefore_lbreak_length">
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+<!-- Putting 2 digit or more cause error-->
+    </string-array>
+</resources>

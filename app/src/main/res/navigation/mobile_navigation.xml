@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation" app:startDestination="@id/task_dest">
+
+    <fragment android:id="@+id/task_dest"
+              android:name="com.ned.optimaltime.TaskListFragment"
+              android:label="Task List"
+              tools:layout="@layout/recyclerview_tasklist"/>
+
+    <fragment android:id="@+id/timer_dest"
+              android:name="com.ned.optimaltime.TimerFragment"
+              android:label="Timer"
+              tools:layout="@layout/timer_fragment"/>
+
+    <fragment android:id="@+id/stats_dest"
+              android:name="com.ned.optimaltime.StatisticsFragment"
+              android:label="Statistics"
+              tools:layout="@layout/stats_fragment"/>
+
+    <fragment android:id="@+id/settings_dest"
+              android:name="com.ned.optimaltime.SettingsFragment"
+              android:label="Settings"/>
+</navigation>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- how to connect through fragment?? -->
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_marginBottom="?attr/actionBarSize">
+
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:backgroundTintMode="multiply">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="+"
+                android:textColor="@color/darker"
+                android:textSize= "30dp"
+                android:layout_marginStart="20dp"/>
+        <EditText
+                android:id="@+id/addNewTaskName"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences"
+                android:hint="@string/addNewTaskPlaceHolder"
+                android:textColor="@color/darker"
+                android:layout_gravity="center"
+                android:layout_marginStart="7dp"
+                android:maxLength="24"
+        />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            >
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
