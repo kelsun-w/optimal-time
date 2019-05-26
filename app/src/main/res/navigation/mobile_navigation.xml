@@ -7,19 +7,59 @@
     <fragment android:id="@+id/task_dest"
               android:name="com.ned.optimaltime.TaskListFragment"
               android:label="Task List"
-              tools:layout="@layout/recyclerview_tasklist"/>
+              tools:layout="@layout/recyclerview_tasklist">
+        <action android:id="@+id/action_task_dest_to_timer_dest" app:destination="@id/timer_dest"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_task_dest_to_stats_dest" app:destination="@id/stats_dest"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_task_dest_to_settings_dest" app:destination="@id/settings_dest"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 
     <fragment android:id="@+id/timer_dest"
               android:name="com.ned.optimaltime.TimerFragment"
               android:label="Timer"
-              tools:layout="@layout/timer_fragment"/>
+              tools:layout="@layout/timer_fragment">
+        <action android:id="@+id/action_timer_dest_to_task_dest" app:destination="@id/task_dest"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_timer_dest_to_settings_dest" app:destination="@id/settings_dest"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_timer_dest_to_stats_dest2" app:destination="@id/stats_dest"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 
     <fragment android:id="@+id/stats_dest"
               android:name="com.ned.optimaltime.StatisticsFragment"
               android:label="Statistics"
-              tools:layout="@layout/stats_fragment"/>
+              tools:layout="@layout/stats_fragment">
+        <action android:id="@+id/action_stats_dest_to_settings_dest" app:destination="@id/settings_dest"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_stats_dest_to_timer_dest2" app:destination="@id/timer_dest"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_stats_dest_to_task_dest2" app:destination="@id/task_dest"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 
     <fragment android:id="@+id/settings_dest"
               android:name="com.ned.optimaltime.SettingsFragment"
-              android:label="Settings"/>
+              android:label="Settings">
+        <action android:id="@+id/action_settings_dest_to_timer_dest" app:destination="@id/timer_dest"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_settings_dest_to_stats_dest" app:destination="@id/stats_dest"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_settings_dest_to_task_dest" app:destination="@id/task_dest"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 </navigation>

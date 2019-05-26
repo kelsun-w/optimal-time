@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +28,7 @@ class MainRecyclerAdapter(private val dataList: ArrayList<Task>) :
         holder.taskName.text = dataList[position].name
         holder.progress.text = dataList[position].done.toString()
 
-        holder.task.setOnClickListener() {
+        holder.task_start_btn.setOnClickListener() {
             val gson = Gson()
             val currentTask = gson.toJson(dataList[position])
             val context = holder.task.context
@@ -35,12 +36,14 @@ class MainRecyclerAdapter(private val dataList: ArrayList<Task>) :
             PrefUtil.setCurrentRunningTask(currentTask,context)
             Log.i("TASK_RUNNING",currentTask)  //debug
 
-            it.findNavController().navigate(R.id.timer_dest)
+            it.findNavController().navigate(R.id.action_task_dest_to_timer_dest)
         }
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val task = itemView.findViewById<ViewGroup>(R.id.taskrow)
+        val task_start_btn = task.findViewById<ImageView>(R.id.task_startbutton)
+
         val taskName : TextView = task.task_name
         val progress = task.task_progress
     }

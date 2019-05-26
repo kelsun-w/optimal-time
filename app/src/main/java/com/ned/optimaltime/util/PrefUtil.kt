@@ -68,7 +68,12 @@ class PrefUtil {
             }
             Log.i("Time set",worklengthStr)
 
-            val worklength = worklengthStr.get(0) + "" + worklengthStr.get(1)
+            val worklength = worklengthStr.get(0) + "" +
+                    if(!worklengthStr.get(1).equals(' '))
+                        worklengthStr.get(1)
+                    else
+                        ""
+
             return worklength.toInt()
 
             //TODO: SETTING PREF is String values so CONVERT to Int first and return

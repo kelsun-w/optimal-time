@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //TODO: define navigation with acitons
         return item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
                 || super.onOptionsItemSelected(item)
     }

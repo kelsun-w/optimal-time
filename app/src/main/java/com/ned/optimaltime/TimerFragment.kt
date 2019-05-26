@@ -92,35 +92,38 @@ class TimerFragment : Fragment() {
 
         }
 
-         if(PrefUtil.getCurrentRunningTask(context!!).isEmpty() && titletask.visibility != View.INVISIBLE)
+        if(PrefUtil.getCurrentRunningTask(context!!).isEmpty() && titletask.visibility != View.INVISIBLE)
         {
             titletask.visibility = View.INVISIBLE
         }
 
         fab_start.setOnClickListener { v ->
+            Log.i("btn click","start!")
             startTimer()
             timerState = TimerState.RUNNING
             updateButtons()
         }
 
         fab_pause.setOnClickListener { v ->
+            Log.i("btn click","pause!")
             timer.cancel()
             timerState = TimerState.PAUSED
             updateButtons()
         }
 
         fab_stop.setOnClickListener { v ->
-            timer.cancel()
+            Log.i("btn click","stop!")
+            if(::timer.isInitialized)
+                timer.cancel()
+
             onTimerFinished()
         }
 
         updateButtons()
+        Log.i("State",timerState.toString())
+
     }
 
-    override fun onStop() {
-        super.onStop()
-        onTimerFinished()
-    }
 
     override fun onResume() {
         super.onResume()
@@ -197,7 +200,19 @@ class TimerFragment : Fragment() {
         timerState = TimerState.STOPPED
 
         evaluateTask()
-        updateMode()
+        if(PrefUtil.getTimerMode(context!!) == TimerMode.POMODORO){
+            //if mode is WORK, update to BREAK only if we finished the full work length
+            if(secondsRemaining <= 0) {
+                //TODO: Dialog box prompting user they want to go to break or continue work
+                val count = PrefUtil.getTaskDoneCount(context!!) + 1
+                PrefUtil.setTaskDoneCount(count, context!!)
+                updateMode()
+            }
+        }else{
+            //if mode is BREAK, we can jsut update to WORK
+            updateMode()
+        }
+
         //set the length of the timer to be the one set in SettingsActivity
         //if the length was changed when the timer was running
         setNewTimerLength()
