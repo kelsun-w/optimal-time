@@ -38,8 +38,12 @@ dependencies {
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha06'
 
     implementation 'androidx.preference:preference-ktx:1.1.0-alpha05'
-    //circle progress bar 3rd party library
+
+    //3rd party libraries
+    //circle progress bar
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     //serialization json library
     implementation 'com.google.code.gson:gson:2.8.5'
+    //charting library
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

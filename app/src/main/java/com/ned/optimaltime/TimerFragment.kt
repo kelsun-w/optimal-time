@@ -22,11 +22,12 @@ import java.util.*
 
 class TimerFragment : Fragment() {
     //TODO: BUG in OnViewCreated()  when app closes in PAUSED state and reopens, STOP button is clickable calling to Timer's stop() method
-        // TODO: [cont] BUT Timer is uninitialized and thus crashes the app
-        companion object {
+    // TODO: [cont] BUT Timer is uninitialized and thus crashes the app
+    //UPDATE : SOLVED BY CHECKING IF TIMER IS INITIALIZED FIRST BEFORE CALLING TIMER.CANCEL()
+    companion object {
 
         fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
-            val  wakeUpTime= (nowSeconds + secondsRemaining) * 1000
+            val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
             //what happens when alarms goes off
@@ -50,7 +51,6 @@ class TimerFragment : Fragment() {
             get() = Calendar.getInstance().timeInMillis / 1000
     }
 
-
     enum class TimerState {
         STOPPED, PAUSED, RUNNING
     }
@@ -64,6 +64,16 @@ class TimerFragment : Fragment() {
     private var timerState = TimerState.STOPPED
 
     private var secondsRemaining: Long = 0
+
+    private lateinit var mode : TimerMode
+    private var taskDone = 0
+    private var taskSkipped = 0
+//    private lateinit var taskList: ArrayList<Task>
+
+    //Json serialization stuffs
+    val gson : Gson = Gson()
+    val task_type = object : TypeToken<Task>() {}.type
+    val array_task_type = object:TypeToken<ArrayList<Task>>() {}.type
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,54 +90,64 @@ class TimerFragment : Fragment() {
         //title of task selected
         val titletask = view.findViewById<TextView>(R.id.timertask_name)
 
-        if(PrefUtil.getCurrentRunningTask(context!!).isNotEmpty())
-        {
+        //get the task done count when screen get loaded at first
+        taskDone = PrefUtil.getTaskDoneCount(context!!)
+        mode = PrefUtil.getTimerMode(context!!)
+        taskSkipped = PrefUtil.getTaskSkippedCount(context!!)
+
+        if (PrefUtil.getCurrentRunningTask(context!!).isNotEmpty()) {
             val taskjson = PrefUtil.getCurrentRunningTask(context!!)
-            val task = Gson().fromJson<Task>(taskjson, object : TypeToken<Task>() {}.type)
+            val task = gson.fromJson<Task>(taskjson, task_type)
 
             // set the name of the timer in the timer screen to the specific selected task name
             titletask.text = "Task : " + task.name
 
-            titletask.visibility = View.VISIBLE
-
-        }
-
-        if(PrefUtil.getCurrentRunningTask(context!!).isEmpty() && titletask.visibility != View.INVISIBLE)
-        {
-            titletask.visibility = View.INVISIBLE
+        }else{
+            val dataset = Gson().fromJson<ArrayList<Task>>(PrefUtil.getTask_List(context!!),array_task_type)
+            for(x in dataset){
+                if(x.name == "Other")
+                {
+                    PrefUtil.setCurrentRunningTask(gson.toJson(x),context as Activity)
+                }
+            }
+            titletask.text = "Task : Other"
         }
 
         fab_start.setOnClickListener { v ->
-            Log.i("btn click","start!")
+            Log.i("btn click", "start!")
             startTimer()
             timerState = TimerState.RUNNING
             updateButtons()
         }
 
         fab_pause.setOnClickListener { v ->
-            Log.i("btn click","pause!")
+            Log.i("btn click", "pause!")
             timer.cancel()
             timerState = TimerState.PAUSED
             updateButtons()
         }
 
         fab_stop.setOnClickListener { v ->
-            Log.i("btn click","stop!")
-            if(::timer.isInitialized)
+            Log.i("btn click", "stop!")
+            if (::timer.isInitialized)
                 timer.cancel()
 
             onTimerFinished()
         }
 
         updateButtons()
-        Log.i("State",timerState.toString())
+        Log.i("State", timerState.toString())
 
     }
-
 
     override fun onResume() {
         super.onResume()
 
+//        Log.i("task",taskDone.toString())
+
+        taskDone = PrefUtil.getTaskDoneCount(context!!)
+        taskSkipped = PrefUtil.getTaskSkippedCount(context!!)
+        mode = PrefUtil.getTimerMode(context as Activity)
         initTimer()
         removeAlarm(context!!)
 //        NotificationUtil.hideTimerNotification(this)
@@ -138,14 +158,18 @@ class TimerFragment : Fragment() {
 
         if (timerState == TimerState.RUNNING) {
             timer.cancel()
-            val wakeUpTime = setAlarm(context!!, nowSeconds,secondsRemaining)
+            val wakeUpTime = setAlarm(context!!, nowSeconds, secondsRemaining)
         }
 
-
+//        Log.i("task saved",taskDone.toString()+" "+mode.toString())
         //persist the timer data to use on resume of app
         PrefUtil.setPreviousTimerLengthSeconds(timerLengthSeconds, context as Activity)
         PrefUtil.setSecondsRemaining(secondsRemaining, context as Activity)
         PrefUtil.setTimerState(timerState, context as Activity)
+
+        PrefUtil.setTimerMode(mode,context as Activity)
+        PrefUtil.setTaskDoneCount(taskDone,context as Activity)
+        PrefUtil.setTaskSkippedCount(taskSkipped,context as Activity)
     }
 
     private fun initTimer() {
@@ -168,7 +192,7 @@ class TimerFragment : Fragment() {
 
         //Subtract the secondsRemaining from before the alarm was set
         // by the seconds passed during running the background alarm
-        if(alarmSetTime>0)
+        if (alarmSetTime > 0)
             secondsRemaining -= nowSeconds - alarmSetTime
 
 
@@ -199,18 +223,24 @@ class TimerFragment : Fragment() {
     private fun onTimerFinished() {
         timerState = TimerState.STOPPED
 
-        evaluateTask()
-        if(PrefUtil.getTimerMode(context!!) == TimerMode.POMODORO){
+        if(PrefUtil.getTimerMode(context!!) == TimerMode.POMODORO) {
             //if mode is WORK, update to BREAK only if we finished the full work length
-            if(secondsRemaining <= 0) {
+            evaluateTask()
+            if (secondsRemaining <= 0) {
                 //TODO: Dialog box prompting user they want to go to break or continue work
-                val count = PrefUtil.getTaskDoneCount(context!!) + 1
-                PrefUtil.setTaskDoneCount(count, context!!)
                 updateMode()
             }
-        }else{
-            //if mode is BREAK, we can jsut update to WORK
+        } else {
+            //if mode is BREAK, we can just update to WORK
             updateMode()
+        }
+
+        if(mode == TimerMode.POMODORO){
+            break_msg.visibility = View.INVISIBLE
+            break_msg2.visibility = View.INVISIBLE
+        }else{
+            break_msg.visibility = View.VISIBLE
+            break_msg2.visibility = View.VISIBLE
         }
 
         //set the length of the timer to be the one set in SettingsActivity
@@ -232,34 +262,32 @@ class TimerFragment : Fragment() {
 
         val data = PrefUtil.getTask_List(context!!)
 
-        val gson = Gson()
-
-        val type = object : TypeToken<ArrayList<Task>>() {}.type
-        val dataAsArray = gson.fromJson<ArrayList<Task>>(data,type)
+        val dataAsArray = gson.fromJson<ArrayList<Task>>(data, array_task_type)
 
         var taskname = ""
         //bug here
-        if(currentTask.isEmpty()){
+        if (currentTask.isEmpty()) {
             taskname = "Other" //TODO: SET CURRENT TASK AVAILABLE
-        }else{
-            val taskTemp = gson.fromJson<Task>(currentTask, object : TypeToken<Task>() {}.type)
+        } else {
+            val taskTemp = gson.fromJson<Task>(currentTask, task_type)
             taskname = taskTemp.name
         }
 
-        for(t in dataAsArray){
-            if(t.name == taskname){
-                if(secondsRemaining <= 0)
-                {
+        for (t in dataAsArray) {
+            if (t.name == taskname) {
+                if (secondsRemaining <= 0) {
                     t.incrementDone()
+                    taskDone++
                     //TODO: increase daily done task count AND check if we reached daily goal AND notify user
-                }else{
+                } else {
                     t.incrementSkip()
+                    taskSkipped++
                 }
             }
         }
 
-        val arrayAsJson= gson.toJson(dataAsArray)
-        Log.i("FINISHED TASK",arrayAsJson)
+        val arrayAsJson = gson.toJson(dataAsArray)
+        Log.i("FINISHED TASK", arrayAsJson)
 
         // persist the data
         PrefUtil.setTaskList(arrayAsJson, context!!)
@@ -285,22 +313,21 @@ class TimerFragment : Fragment() {
         progress_countdown.progress = (timerLengthSeconds - secondsRemaining).toInt()
     }
 
-    private fun updateMode(){
-        val mode = PrefUtil.getTimerMode(context!!)
+    private fun updateMode() {
         val count = PrefUtil.getTaskDoneCount(context!!)
 
-        if(mode == TimerMode.POMODORO)
-        {
+        if (mode == TimerMode.POMODORO) {
             Log.i("COUNT FRAGMENT", count.toString())
             Log.i("COUNT mode", mode.toString())
-            if(count%PrefUtil.getCountBeforeLongBreak(context!!) == 0)
-                PrefUtil.setTimerMode(TimerMode.LONG_BREAK, context!!)
+            if (count % PrefUtil.getCountBeforeLongBreak(context!!) == 0)
+                mode = TimerMode.LONG_BREAK
             else
-                PrefUtil.setTimerMode(TimerMode.SHORT_BREAK,context!!)
-        }else{
-            PrefUtil.setTimerMode(TimerMode.POMODORO,context!!)
+                mode = TimerMode.SHORT_BREAK
+        } else {
+            mode = TimerMode.POMODORO
         }
 
+        PrefUtil.setTimerMode(mode,context as Activity)
     }
 
     private fun updateButtons() {

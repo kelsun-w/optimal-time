@@ -26,8 +26,7 @@ class TaskListFragment : Fragment() {
     private lateinit var data: ArrayList<Task>
     private lateinit var addBtn: Button
 
-
-    private lateinit var gson: Gson    //for converting json
+    private val gson: Gson = Gson()    //for converting json
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,15 +44,13 @@ class TaskListFragment : Fragment() {
         recyclerView = contextView.findViewById<RecyclerView>(R.id.recyclerview)
         linearLayoutManager = LinearLayoutManager(this.activity)
 
-        gson = Gson()
-
         setupList()
 
         val addNewTask = contextView.findViewById<EditText>(R.id.addNewTaskName)
 
         addNewTask.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                Log.e("New Task Label Check", "Its working")
+                Log.i("New Task Label Check", "Its working")
                 addTask()
                 restoreScrollPositionAfterAdded()
                 hideSoftKeyboard(activity as Activity)

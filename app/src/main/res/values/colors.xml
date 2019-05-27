@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#009688</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#F57C00</color>
+    <color name="colorAccent">#FFE0B2</color>
 
+    <color name="a1">#44B3C2</color>
+    <color name="a2">#F1A94E</color>
+    <color name="a3">#E45641</color>
+    <color name="a4">#5D4C46</color>
+    <color name="a5">#7B8D8E</color>
+    <color name="a6">#F2EDD8</color>
 
-    <color name="darker">#D3D3D3</color>
+    <color name="placeholder">#FFD493</color>
+
+    <color name="progress_start">#FFB74D</color>
+    <color name="progress_end">#FF9100</color>
 </resources>

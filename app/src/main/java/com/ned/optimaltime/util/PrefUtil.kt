@@ -21,6 +21,19 @@ class PrefUtil {
             editor.apply()
         }
 
+        private const val taskSkipped_ID = "com.ned.optimaltime.taskSkipped"
+
+        fun getTaskSkippedCount(context: Context): Int {
+            val preference = PreferenceManager.getDefaultSharedPreferences(context)
+            return preference.getInt(taskSkipped_ID, 0)
+        }
+
+        fun setTaskSkippedCount(count: Int, context: Context) {
+            val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+            editor.putInt(taskSkipped_ID, count)
+            editor.apply()
+        }
+
         private const val currentTask_ID = "com.ned.optimaltime.task_running"
 
         fun getCurrentRunningTask(context: Context): String {
@@ -157,5 +170,19 @@ class PrefUtil {
             editor.putLong(ALARM_SET_TIME_ID, time)
             editor.apply()
         }
+
+
+//        private const val DATE_COUNT_MAP = "com.ned.optimal.timer.date_with_count"
+//
+//        fun saveDateWithCount(dataMap : String, context : Context){
+//            val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+//            editor.putString(DATE_COUNT_MAP, dataMap)
+//            editor.apply()
+//        }
+//
+//        fun getDateWithCount(context : Context): String{
+//            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+//            return preferences.getString(DATE_COUNT_MAP,"")
+//        }
     }
 }

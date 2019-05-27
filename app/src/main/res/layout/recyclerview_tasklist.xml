@@ -13,16 +13,14 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/colorPrimary"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:backgroundTintMode="multiply">
+            android:background="@color/colorPrimary">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="+"
-                android:textColor="@color/darker"
+                android:textColor="@color/placeholder"
                 android:textSize= "30dp"
                 android:layout_marginStart="20dp"/>
         <EditText
@@ -32,7 +30,7 @@
                 android:imeOptions="actionDone"
                 android:inputType="textCapSentences"
                 android:hint="@string/addNewTaskPlaceHolder"
-                android:textColor="@color/darker"
+                android:textColor="@color/placeholder"
                 android:layout_gravity="center"
                 android:layout_marginStart="7dp"
                 android:maxLength="24"
