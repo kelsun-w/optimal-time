@@ -17,6 +17,7 @@
                 android:entries="@array/pref_entries_work_length"
                 android:summary="%s"
                 android:entryValues="@array/pref_entries_work_length"
+                android:icon="@drawable/work"
         />
         <DropDownPreference
                 android:key="pref_sbreak_length"
@@ -24,6 +25,7 @@
                 android:summary="%s"
                 android:entries="@array/pref_entries_sbreak_length"
                 android:entryValues="@array/pref_entries_sbreak_length"
+                android:icon="@drawable/shortbreak"
         />
         <DropDownPreference
                 android:key="pref_lbreak_length"
@@ -31,6 +33,7 @@
                 android:summary="%s"
                 android:entries="@array/pref_entries_lbreak_length"
                 android:entryValues="@array/pref_entries_lbreak_length"
+                android:icon="@drawable/longbreak"
         />
         <DropDownPreference
                 android:key="pref_work_before_lbreak"
@@ -38,12 +41,8 @@
                 android:summary="%s"
                 android:entries="@array/pref_entries_workbefore_lbreak_length"
                 android:entryValues="@array/pref_entries_workbefore_lbreak_length"
+                android:icon="@drawable/longbreakafter"
         />
     </PreferenceCategory>
-
-    <Preference
-            app:key="feedback"
-            app:title="Send feedback"
-            app:summary="Report technical issues or suggest new features"/>
 
 </PreferenceScreen>

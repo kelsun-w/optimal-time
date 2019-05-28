@@ -13,7 +13,7 @@ import com.ned.optimaltime.model.Task
 import com.ned.optimaltime.util.PrefUtil
 import kotlinx.android.synthetic.main.task_item_row.view.*
 
-class MainRecyclerAdapter(private val dataList: ArrayList<Task>) :
+class MainRecyclerAdapter(public val dataList: ArrayList<Task>) :
     RecyclerView.Adapter<MainRecyclerAdapter.TaskViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainRecyclerAdapter.TaskViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.task_item_row, parent, false)

@@ -1,6 +1,7 @@
 package com.ned.optimaltime
 
 import android.app.Activity
+import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,12 +12,15 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.ned.optimaltime.model.Task
 import com.ned.optimaltime.util.PrefUtil
+
+
 
 class TaskListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -26,6 +30,7 @@ class TaskListFragment : Fragment() {
     private lateinit var data: ArrayList<Task>
     private lateinit var addBtn: Button
 
+    private lateinit var swipeController : SwipeController
     private val gson: Gson = Gson()    //for converting json
 
     override fun onCreateView(
@@ -128,6 +133,27 @@ class TaskListFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
         adapter = MainRecyclerAdapter(data)
         recyclerView.adapter = adapter
+
+
+        //adding swiping feature for deleting
+        swipeController = SwipeController(object : SwipeControllerActions() {
+            override fun onRightClicked(position: Int) {
+                adapter.dataList.removeAt(position)
+                adapter.notifyItemRemoved(position)
+                adapter.notifyItemRangeChanged(position, adapter.getItemCount())
+
+                PrefUtil.setTaskList(gson.toJson(adapter.dataList),context!!)
+            }
+        })
+
+        val itemTouchhelper = ItemTouchHelper(swipeController)
+        itemTouchhelper.attachToRecyclerView(recyclerView)
+
+        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+                swipeController.onDraw(c)
+            }
+        })
     }
 
     fun hideSoftKeyboard(activity: Activity) {

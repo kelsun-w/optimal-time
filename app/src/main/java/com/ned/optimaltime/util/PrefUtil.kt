@@ -95,9 +95,15 @@ class PrefUtil {
 
         fun getCountBeforeLongBreak(context : Context): Int{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val countbeforelbreak = preferences.getString("pref_work_before_lbreak","4")
-            Log.i("PREF WORK B4 B", countbeforelbreak)
-            return countbeforelbreak.toInt()
+            val countstr = preferences.getString("pref_work_before_lbreak","4")
+            val count = countstr.get(0) +
+                    if(countstr.get(1).equals(' ')) {
+                        ""
+                    } else {
+                        ""+countstr.get(1)
+                    }
+            Log.i("PREF WORK B4 B", countstr)
+            return count.toInt()
         }
 
         private const val PREVIOUS_TIMER_LENGTH_SECONDS_ID = "com.ned.optimaltime.timer.previous_timer_length_seconds"

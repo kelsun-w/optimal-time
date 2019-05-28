@@ -21,9 +21,7 @@ import kotlinx.android.synthetic.main.timer_fragment.*
 import java.util.*
 
 class TimerFragment : Fragment() {
-    //TODO: BUG in OnViewCreated()  when app closes in PAUSED state and reopens, STOP button is clickable calling to Timer's stop() method
-    // TODO: [cont] BUT Timer is uninitialized and thus crashes the app
-    //UPDATE : SOLVED BY CHECKING IF TIMER IS INITIALIZED FIRST BEFORE CALLING TIMER.CANCEL()
+    //TODO: BUG timer running in background finishes but done count is not increased
     companion object {
 
         fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
@@ -116,7 +114,6 @@ class TimerFragment : Fragment() {
         fab_start.setOnClickListener { v ->
             Log.i("btn click", "start!")
             startTimer()
-            timerState = TimerState.RUNNING
             updateButtons()
         }
 
@@ -326,7 +323,6 @@ class TimerFragment : Fragment() {
         } else {
             mode = TimerMode.POMODORO
         }
-
         PrefUtil.setTimerMode(mode,context as Activity)
     }
 

@@ -75,14 +75,14 @@ class StatisticsFragment : Fragment() {
 
         //value text and label text
         val pieData : PieData = PieData(set)
-        pieData.setValueTextSize(20f)
+        pieData.setValueTextSize(15f)
         pieData.setValueTextColor(Color.WHITE)
-        pieChart.setEntryLabelTextSize(20f)
+        pieChart.setEntryLabelTextSize(15f)
 
         //legend
         val legend = pieChart.legend
         legend.textColor = Color.WHITE
-        legend.textSize = 15f
+        legend.textSize = 17f
 
         //description
         val description = pieChart.description

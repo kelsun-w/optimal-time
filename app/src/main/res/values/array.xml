@@ -21,9 +21,9 @@
         <item>20 minutes</item>
     </string-array>
     <string-array name="pref_entries_workbefore_lbreak_length">
-        <item>4</item>
-        <item>6</item>
-        <item>8</item>
+        <item>4 pomodoros</item>
+        <item>6 pomodoros</item>
+        <item>8 pomodoros</item>
 <!-- Putting 2 digit or more cause error-->
     </string-array>
 </resources>
