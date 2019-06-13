@@ -111,6 +111,12 @@ class TimerFragment : Fragment() {
             titletask.text = "Task : Other"
         }
 
+        if(mode == TimerMode.POMODORO){
+            break_msg.visibility = View.INVISIBLE
+        }else{
+            break_msg.visibility = View.VISIBLE
+        }
+
         fab_start.setOnClickListener { v ->
             Log.i("btn click", "start!")
             startTimer()
@@ -234,10 +240,8 @@ class TimerFragment : Fragment() {
 
         if(mode == TimerMode.POMODORO){
             break_msg.visibility = View.INVISIBLE
-            break_msg2.visibility = View.INVISIBLE
         }else{
             break_msg.visibility = View.VISIBLE
-            break_msg2.visibility = View.VISIBLE
         }
 
         //set the length of the timer to be the one set in SettingsActivity

@@ -15,8 +15,7 @@
     <string name="pref_length_Lbreak">Long Break</string>
     <string name="pref_Lbreak_after">Long Break After</string>
     <string name="stats_taskdone_count">Total Task Done : </string>
-    <string name="timer_break_message">BREAK TIME NOW. LET LOOSE</string>
+    <string name="timer_break_message">BREAK TIME</string>
     <string name="stats_taskdone_skip">Total Task Skipped:</string>
-    <string name="timer_break_message2">TAKE IT EASY</string>
 
 </resources>
