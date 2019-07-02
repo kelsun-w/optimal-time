@@ -13,8 +13,8 @@ import com.ned.optimaltime.util.PrefUtil
 class TimerExpiredReciever : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        PrefUtil.setTimerState(TimerFragment.TimerState.STOPPED, context)
         PrefUtil.setAlarmSetTime(0, context)
+        PrefUtil.setSecondsRemaining(0,context)
         sendNotification(context)
     }
 
@@ -23,7 +23,6 @@ class TimerExpiredReciever : BroadcastReceiver() {
         val body = "Work hard \uD83D\uDE24 Play hard \uD83D\uDE0E"
 
         val notif: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val channelId = "some_channel_id"

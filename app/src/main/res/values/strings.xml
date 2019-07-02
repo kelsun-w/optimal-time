@@ -17,5 +17,6 @@
     <string name="stats_taskdone_count">Total Task Done : </string>
     <string name="timer_break_message">BREAK TIME</string>
     <string name="stats_taskdone_skip">Total Task Skipped:</string>
+    <string name="undo_text">UNDO</string>
 
 </resources>

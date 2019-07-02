@@ -1,7 +1,6 @@
 package com.ned.optimaltime.util
 
 import android.content.Context
-import android.util.Log
 import androidx.preference.PreferenceManager
 import com.ned.optimaltime.TimerFragment
 
@@ -79,7 +78,7 @@ class PrefUtil {
                 else ->
                     worklengthStr = "25"
             }
-            Log.i("Time set",worklengthStr)
+//            Log.i("Time set",worklengthStr)
 
             val worklength = worklengthStr.get(0) + "" +
                     if(!worklengthStr.get(1).equals(' '))
@@ -88,8 +87,6 @@ class PrefUtil {
                         ""
 
             return worklength.toInt()
-
-            //TODO: SETTING PREF is String values so CONVERT to Int first and return
         }
 
 
@@ -102,7 +99,6 @@ class PrefUtil {
                     } else {
                         ""+countstr.get(1)
                     }
-            Log.i("PREF WORK B4 B", countstr)
             return count.toInt()
         }
 
@@ -148,7 +144,6 @@ class PrefUtil {
             editor.putInt(TIMER_MODE_ID, ordinal)
             editor.apply()
         }
-
 
         private const val SECONDS_REMAINING_ID = "com.ned.optimaltime.timer.seconds_remaining"
 

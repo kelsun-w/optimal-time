@@ -1,6 +1,5 @@
 package com.ned.optimaltime
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,19 @@ import com.ned.optimaltime.model.Task
 import com.ned.optimaltime.util.PrefUtil
 import kotlinx.android.synthetic.main.task_item_row.view.*
 
-class MainRecyclerAdapter(public val dataList: ArrayList<Task>) :
+class MainRecyclerAdapter(private val dataList: ArrayList<Task>) :
     RecyclerView.Adapter<MainRecyclerAdapter.TaskViewHolder>() {
+    //getter
+    public fun getDataList():ArrayList<Task> = dataList
+
+    inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val task = itemView.findViewById<ViewGroup>(R.id.taskrow)
+        val task_start_btn = task.findViewById<ImageView>(R.id.task_startbutton)
+
+        val taskName : TextView = task.task_name
+        val progress = task.task_progress
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainRecyclerAdapter.TaskViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.task_item_row, parent, false)
         return TaskViewHolder(v)
@@ -34,18 +44,26 @@ class MainRecyclerAdapter(public val dataList: ArrayList<Task>) :
             val context = holder.task.context
 
             PrefUtil.setCurrentRunningTask(currentTask,context)
-            Log.i("TASK_RUNNING",currentTask)  //debug
+//            Log.i("TASK_RUNNING",currentTask)  //debug
 
             it.findNavController().navigate(R.id.action_task_dest_to_timer_dest)
+
         }
     }
 
-    inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val task = itemView.findViewById<ViewGroup>(R.id.taskrow)
-        val task_start_btn = task.findViewById<ImageView>(R.id.task_startbutton)
-
-        val taskName : TextView = task.task_name
-        val progress = task.task_progress
+    public fun removeItem(position: Int){
+        dataList.removeAt(position)
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position)
     }
+
+    public fun restoreItem(item : Task, position: Int){
+        dataList.add(position, item)
+        // notify item added by position
+        notifyItemInserted(position)
+    }
+
 }
 

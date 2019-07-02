@@ -32,6 +32,7 @@ class StatisticsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
+
         total_task_done.text = PrefUtil.getTaskDoneCount(context!!).toString()
         total_task_skipped.text = PrefUtil.getTaskSkippedCount(context!!).toString()
         displayDataAsPie()

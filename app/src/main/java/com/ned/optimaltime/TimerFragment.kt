@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,7 @@ import kotlinx.android.synthetic.main.timer_fragment.*
 import java.util.*
 
 class TimerFragment : Fragment() {
-    //TODO: BUG timer running in background finishes but done count is not increased
+    //TODO: After deleting a CURRENT RUNNING TASK change the pointer to another task
     companion object {
 
         fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
@@ -85,6 +84,7 @@ class TimerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //title of task selected
         val titletask = view.findViewById<TextView>(R.id.timertask_name)
 
@@ -117,21 +117,25 @@ class TimerFragment : Fragment() {
             break_msg.visibility = View.VISIBLE
         }
 
+        fab_debug.setOnClickListener {v ->
+            if (::timer.isInitialized)
+                debugFinish()   //For saving time while debugging
+        }
         fab_start.setOnClickListener { v ->
-            Log.i("btn click", "start!")
+//            Log.i("btn click", "start!")
             startTimer()
             updateButtons()
         }
 
         fab_pause.setOnClickListener { v ->
-            Log.i("btn click", "pause!")
+//            Log.i("btn click", "pause!")
             timer.cancel()
             timerState = TimerState.PAUSED
             updateButtons()
         }
 
         fab_stop.setOnClickListener { v ->
-            Log.i("btn click", "stop!")
+//            Log.i("btn click", "stop!")
             if (::timer.isInitialized)
                 timer.cancel()
 
@@ -139,13 +143,12 @@ class TimerFragment : Fragment() {
         }
 
         updateButtons()
-        Log.i("State", timerState.toString())
+//        Log.i("State", timerState.toString())
 
     }
 
     override fun onResume() {
         super.onResume()
-
 //        Log.i("task",taskDone.toString())
 
         taskDone = PrefUtil.getTaskDoneCount(context!!)
@@ -153,7 +156,6 @@ class TimerFragment : Fragment() {
         mode = PrefUtil.getTimerMode(context as Activity)
         initTimer()
         removeAlarm(context!!)
-//        NotificationUtil.hideTimerNotification(this)
     }
 
     override fun onPause() {
@@ -164,15 +166,12 @@ class TimerFragment : Fragment() {
             val wakeUpTime = setAlarm(context!!, nowSeconds, secondsRemaining)
         }
 
-//        Log.i("task saved",taskDone.toString()+" "+mode.toString())
         //persist the timer data to use on resume of app
+        PrefUtil.setTimerMode(mode,context as Activity)
+
         PrefUtil.setPreviousTimerLengthSeconds(timerLengthSeconds, context as Activity)
         PrefUtil.setSecondsRemaining(secondsRemaining, context as Activity)
         PrefUtil.setTimerState(timerState, context as Activity)
-
-        PrefUtil.setTimerMode(mode,context as Activity)
-        PrefUtil.setTaskDoneCount(taskDone,context as Activity)
-        PrefUtil.setTaskSkippedCount(taskSkipped,context as Activity)
     }
 
     private fun initTimer() {
@@ -227,12 +226,13 @@ class TimerFragment : Fragment() {
         timerState = TimerState.STOPPED
 
         if(PrefUtil.getTimerMode(context!!) == TimerMode.POMODORO) {
-            //if mode is WORK, update to BREAK only if we finished the full work length
+            //TODO: Dialog box prompting user they want to go to break or continue work
+
             evaluateTask()
-            if (secondsRemaining <= 0) {
-                //TODO: Dialog box prompting user they want to go to break or continue work
+            if (secondsRemaining <= 0)
+                //if mode is WORK, update to BREAK only if we finished the full work length
                 updateMode()
-            }
+
         } else {
             //if mode is BREAK, we can just update to WORK
             updateMode()
@@ -258,6 +258,10 @@ class TimerFragment : Fragment() {
         updateCountdownUI()
     }
 
+    /**
+     *  Makes changes to the data of current task and the overall data of tasks.
+     *  If this method was called when the timer expired, then `task done count` increases else `task skip count` increases
+     **/
     private fun evaluateTask() {
         val currentTask = PrefUtil.getCurrentRunningTask(context!!)
 
@@ -266,9 +270,9 @@ class TimerFragment : Fragment() {
         val dataAsArray = gson.fromJson<ArrayList<Task>>(data, array_task_type)
 
         var taskname = ""
-        //bug here
+
         if (currentTask.isEmpty()) {
-            taskname = "Other" //TODO: SET CURRENT TASK AVAILABLE
+            taskname = "Other"
         } else {
             val taskTemp = gson.fromJson<Task>(currentTask, task_type)
             taskname = taskTemp.name
@@ -288,10 +292,12 @@ class TimerFragment : Fragment() {
         }
 
         val arrayAsJson = gson.toJson(dataAsArray)
-        Log.i("FINISHED TASK", arrayAsJson)
+//        Log.i("FINISHED TASK", arrayAsJson)
 
         // persist the data
         PrefUtil.setTaskList(arrayAsJson, context!!)
+        PrefUtil.setTaskDoneCount(taskDone,context as Activity)
+        PrefUtil.setTaskSkippedCount(taskSkipped,context as Activity)
     }
 
     private fun setNewTimerLength() {
@@ -318,8 +324,8 @@ class TimerFragment : Fragment() {
         val count = PrefUtil.getTaskDoneCount(context!!)
 
         if (mode == TimerMode.POMODORO) {
-            Log.i("COUNT FRAGMENT", count.toString())
-            Log.i("COUNT mode", mode.toString())
+//            Log.i("COUNT FRAGMENT", count.toString())
+//            Log.i("COUNT mode", mode.toString())
             if (count % PrefUtil.getCountBeforeLongBreak(context!!) == 0)
                 mode = TimerMode.LONG_BREAK
             else
@@ -351,4 +357,11 @@ class TimerFragment : Fragment() {
             }
         }
     }
+
+    private fun debugFinish(){
+        secondsRemaining = 0
+        timer.cancel()
+        onTimerFinished()
+    }
+
 }

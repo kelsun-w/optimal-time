@@ -17,7 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 
-//TODO: DISABLE NAVIGATION TO SAME FRAGMENT, EG A FRAGMENT CANNOT NAVIGATE FROM ITSELF TO ITSELF..:/
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
