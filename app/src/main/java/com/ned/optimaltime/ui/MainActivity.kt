@@ -1,4 +1,4 @@
-package com.ned.optimaltime
+package com.ned.optimaltime.ui
 
 import android.content.Context
 import android.graphics.Rect
@@ -14,8 +14,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
-
+import com.ned.optimaltime.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

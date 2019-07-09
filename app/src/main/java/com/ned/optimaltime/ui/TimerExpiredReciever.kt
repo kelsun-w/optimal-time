@@ -1,4 +1,4 @@
-package com.ned.optimaltime
+package com.ned.optimaltime.ui
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,13 +8,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
-import com.ned.optimaltime.util.PrefUtil
+import com.ned.optimaltime.R
+import com.ned.optimaltime.util.TimerUtil
 
 class TimerExpiredReciever : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        PrefUtil.setAlarmSetTime(0, context)
-        PrefUtil.setSecondsRemaining(0,context)
+        TimerUtil.setAlarmSetTime(0, context)
+        TimerUtil.setSecondsRemaining(0,context)
         sendNotification(context)
     }
 

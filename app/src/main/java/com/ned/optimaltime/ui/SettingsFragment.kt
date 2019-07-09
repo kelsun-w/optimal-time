@@ -1,7 +1,8 @@
-package com.ned.optimaltime
+package com.ned.optimaltime.ui
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import com.ned.optimaltime.R
 
 class SettingsFragment : PreferenceFragmentCompat(){
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

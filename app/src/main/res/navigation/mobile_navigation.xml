@@ -5,7 +5,7 @@
             android:id="@+id/mobile_navigation" app:startDestination="@id/task_dest">
 
     <fragment android:id="@+id/task_dest"
-              android:name="com.ned.optimaltime.TaskListFragment"
+              android:name="com.ned.optimaltime.ui.TaskListFragment"
               android:label="Task List"
               tools:layout="@layout/recyclerview_tasklist">
         <action android:id="@+id/action_task_dest_to_timer_dest" app:destination="@id/timer_dest"
@@ -20,7 +20,7 @@
     </fragment>
 
     <fragment android:id="@+id/timer_dest"
-              android:name="com.ned.optimaltime.TimerFragment"
+              android:name="com.ned.optimaltime.ui.TimerFragment"
               android:label="Timer"
               tools:layout="@layout/timer_fragment">
         <action android:id="@+id/action_timer_dest_to_task_dest" app:destination="@id/task_dest"
@@ -35,7 +35,7 @@
     </fragment>
 
     <fragment android:id="@+id/stats_dest"
-              android:name="com.ned.optimaltime.StatisticsFragment"
+              android:name="com.ned.optimaltime.ui.StatisticsFragment"
               android:label="Statistics"
               tools:layout="@layout/stats_fragment">
         <action android:id="@+id/action_stats_dest_to_settings_dest" app:destination="@id/settings_dest"
@@ -50,7 +50,7 @@
     </fragment>
 
     <fragment android:id="@+id/settings_dest"
-              android:name="com.ned.optimaltime.SettingsFragment"
+              android:name="com.ned.optimaltime.ui.SettingsFragment"
               android:label="Settings">
         <action android:id="@+id/action_settings_dest_to_timer_dest" app:destination="@id/timer_dest"
                 app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"

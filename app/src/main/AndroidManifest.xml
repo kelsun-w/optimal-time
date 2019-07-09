@@ -10,13 +10,13 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         <receiver
-                android:name=".TimerExpiredReciever"
+                android:name=".ui.TimerExpiredReciever"
                 android:enabled="true"
                 android:exported="false">
         </receiver>
 
         <activity
-                android:name=".MainActivity"
+                android:name=".ui.MainActivity"
                 android:label="@string/app_name"
                 android:windowSoftInputMode="adjustPan">
             <intent-filter>
