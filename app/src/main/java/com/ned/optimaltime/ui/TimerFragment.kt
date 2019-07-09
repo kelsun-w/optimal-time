@@ -1,40 +1,46 @@
 package com.ned.optimaltime.ui
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ned.optimaltime.R
+import com.ned.optimaltime.util.TimerUtil
+import java.util.*
 
 class TimerFragment : Fragment() {
-//    //TODO: After deleting a CURRENT RUNNING TASK change the pointer to another task
-//    companion object {
-//
-//        fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
-//            val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
-//            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//
-//            //what happens when alarms goes off
-//            val intent = Intent(context, TimerExpiredReciever::class.java)
-//            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
-//
-//            TimerUtil.setAlarmSetTime(nowSeconds, context)
-//            return wakeUpTime
-//        }
-//
-//        fun removeAlarm(context: Context) {
-//            val intent = Intent(context, TimerExpiredReciever::class.java)
-//            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-//            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//            alarmManager.cancel(pendingIntent)
-//            TimerUtil.setAlarmSetTime(0, context)
-//        }
-//
-//        val nowSeconds: Long
-//            get() = Calendar.getInstance().timeInMillis / 1000
-//    }
+    //TODO: After deleting a CURRENT RUNNING TASK change the pointer to another task
+    companion object {
+
+        fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
+            val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+            //what happens when alarms goes off
+            val intent = Intent(context, TimerExpiredReciever::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
+
+            TimerUtil.setAlarmSetTime(nowSeconds, context)
+            return wakeUpTime
+        }
+
+        fun removeAlarm(context: Context) {
+            val intent = Intent(context, TimerExpiredReciever::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.cancel(pendingIntent)
+            TimerUtil.setAlarmSetTime(0, context)
+        }
+
+        val nowSeconds: Long
+            get() = Calendar.getInstance().timeInMillis / 1000
+    }
 //
 //    enum class TimerState {
 //        STOPPED, PAUSED, RUNNING
