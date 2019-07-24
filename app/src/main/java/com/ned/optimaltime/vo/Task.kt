@@ -1,4 +1,4 @@
-package com.ned.optimaltime.model.entity
+package com.ned.optimaltime.vo
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

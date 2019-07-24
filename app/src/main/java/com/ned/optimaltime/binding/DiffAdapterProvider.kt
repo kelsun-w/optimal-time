@@ -1,7 +1,7 @@
 package com.ned.optimaltime.binding
 
 import androidx.recyclerview.widget.DiffUtil
-import com.ned.optimaltime.model.entity.AppEntity
+import com.ned.optimaltime.vo.AppEntity
 
 class DiffAdapterProvider{
 

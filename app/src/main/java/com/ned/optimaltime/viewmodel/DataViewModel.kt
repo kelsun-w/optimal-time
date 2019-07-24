@@ -4,10 +4,11 @@ import android.app.Application
 import androidx.annotation.NonNull
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.ned.optimaltime.model.entity.History
-import com.ned.optimaltime.model.entity.Task
-import com.ned.optimaltime.repositories.HistoryRepository
-import com.ned.optimaltime.repositories.TaskRepository
+import com.ned.optimaltime.repository.HistoryRepository
+import com.ned.optimaltime.repository.TaskRepository
+import com.ned.optimaltime.vo.DateCountFormat
+import com.ned.optimaltime.vo.History
+import com.ned.optimaltime.vo.Task
 
 class DataViewModel(@NonNull application: Application) : AndroidViewModel(application) {
     private val taskRepository: TaskRepository = TaskRepository(application)
@@ -29,35 +30,63 @@ class DataViewModel(@NonNull application: Application) : AndroidViewModel(applic
         taskRepository.update(task)
     }
 
-    fun delete(task : Task){
+    fun delete(task: Task) {
         taskRepository.delete(task)
     }
 
-    fun deleteAll(task: Task){
+    fun deleteAll(task: Task) {
         taskRepository.deleteAllTasks()
     }
 
-    fun getAllTask() : LiveData<List<Task>>{
+    fun getTask(id: Long): Task {
+        return taskRepository.getTask(id)
+    }
+
+    fun getAllTask(): LiveData<List<Task>> {
         return allTask
     }
 
-    fun insert(history : History) {
+    fun insert(history: History) {
         historyRepository.insert(history)
     }
 
-    fun update(history : History) {
+    fun update(history: History) {
         historyRepository.update(history)
     }
 
-    fun delete(history : History){
+    fun delete(history: History) {
         historyRepository.delete(history)
     }
 
-    fun deleteAll(history : History){
+    fun deleteAll(history: History) {
         historyRepository.deleteAllHistory()
     }
 
-    fun getAllHistory() : LiveData<List<History>>{
+    fun getWeeklyHistory() : List<DateCountFormat> {
+        return historyRepository.getWeeklyHistory()
+    }
+
+    fun getMonthlyHistory() : List<DateCountFormat> {
+        return historyRepository.getMonthlyHistory()
+    }
+
+    fun getDailyHistory() : List<DateCountFormat> {
+        return historyRepository.getDailyHistory()
+    }
+
+    fun getAllHistory(): LiveData<List<History>> {
         return allHistory
+    }
+
+    fun getWeeklyHistoryById(uid : Long) : List<DateCountFormat> {
+        return historyRepository.getWeeklyHistoryById(uid)
+    }
+
+    fun getMonthlyHistoryById(uid : Long) : List<DateCountFormat> {
+        return historyRepository.getMonthlyHistoryById(uid)
+    }
+
+    fun getDailyHistoryById(uid : Long) : List<DateCountFormat> {
+        return historyRepository.getDailyHistoryById(uid)
     }
 }

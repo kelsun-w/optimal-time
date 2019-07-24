@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="pref_entries_work_length">
-        <item>1 minute</item>
         <item>25 minutes</item>
         <item>35 minutes</item>
         <item>45 minutes</item>

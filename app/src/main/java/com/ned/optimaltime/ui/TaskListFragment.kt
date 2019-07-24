@@ -17,14 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ned.optimaltime.R
 import com.ned.optimaltime.binding.TaskListAdapter
-import com.ned.optimaltime.model.entity.Task
 import com.ned.optimaltime.util.SwipeUtil
 import com.ned.optimaltime.util.TimerUtil
 import com.ned.optimaltime.viewmodel.DataViewModel
+import com.ned.optimaltime.vo.Task
 
 
 class TaskListFragment : Fragment(), SwipeUtil.SwipeUtilTouchListener {
-    private lateinit var taskViewModel: DataViewModel
+    private lateinit var viewModel: DataViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TaskListAdapter
 
@@ -40,7 +40,7 @@ class TaskListFragment : Fragment(), SwipeUtil.SwipeUtilTouchListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        taskViewModel = ViewModelProviders.of(activity!!).get(DataViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(DataViewModel::class.java)
         recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
         adapter = TaskListAdapter()
 
@@ -82,9 +82,8 @@ class TaskListFragment : Fragment(), SwipeUtil.SwipeUtilTouchListener {
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
 
-        taskViewModel.getAllTask().observe(this, Observer { updatedList ->
+        viewModel.getAllTask().observe(this, Observer { updatedList ->
             adapter.submitList(updatedList)
-
         })
     }
 
@@ -112,7 +111,7 @@ class TaskListFragment : Fragment(), SwipeUtil.SwipeUtilTouchListener {
     private fun addTask() {
         val text = view?.findViewById<EditText>(R.id.addNewTaskName)?.text.toString()
         if ((text.trim()).isNotEmpty()) {  //user did not input an empty string
-            taskViewModel.insert(Task(text.trim(), 0, 0, 0))
+            viewModel.insert(Task(text.trim(), 0, 0, 0))
 
         }
     }
@@ -124,7 +123,7 @@ class TaskListFragment : Fragment(), SwipeUtil.SwipeUtilTouchListener {
         if (dt.uid == TimerUtil.getSpecialId()) {
             // TODO: ERROR MESSAGE
         } else {
-            taskViewModel.delete(dt)
+            viewModel.delete(dt)
         }
         //change the current running task from the deleted task to the special task
         TimerUtil.setCurrentRunningTask(TimerUtil.getSpecialId(), context!!)

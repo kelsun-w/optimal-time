@@ -6,17 +6,37 @@
     <string name="title_stats">Statistics</string>
     <string name="title_settings">Settings</string>
 
-    <string name="addNewTaskPlaceHolder">Add new task...</string>
+    <string name="taskf_newtaskplaceholder">Add new task...</string>
 
-    <string name="timer_intervals_setting">Interval Lengths</string>
+    <string name="timerf_task">Task : %1$s</string>
+    <string name="timerf_stopmsg">Cancel timer?</string>
+    <string name="timerf_stop_positive">Cancel</string>
+    <string name="timerf_stop_negative">Don\'t Cancel</string>
+    <string name="timerf_breakmsg">BREAK TIME</string>
+
+    <string name="statf_header1">Summary</string>
+    <string name="statf_totaltask">Total Task</string>
+    <string name="statf_done">Task Completed :</string>
+    <string name="statfskiplabel">Task Skipped :</string>
+    <string name="statf_totalhour">Total Hours</string>
+    <string name="statf_bestdetail">Completed %1$d work interval(s) (%2$d hrs total)\nSkipped %3$d work interval(s)</string>
+    <string name="statf_header2">Task History</string>
+    <string name="statf_taskselection">Task</string>
+    <string name="statf_selectdate1">FROM</string>
+    <string name="statf_selectdate2">TO</string>
+    <string name="statf_sort1">DAILY</string>
+    <string name="statf_sort2">WEEKLY</string>
+    <string name="statf_sort3">MONTHLY</string>
+    <string name="statf_header3">Project Distribution</string>
+    <string name="statf_distselect1">TASK</string>
+    <string name="statf_distselect2">HOUR</string>
+
+    <string name="pref_title1">Interval Lengths</string>
     <string name="pref_length_work">Work Duration</string>
     <string name="pref_length_Sbreak">Short Break</string>
-    <string name ="pref_work_before_Lbreak">Long Break after</string>
     <string name="pref_length_Lbreak">Long Break</string>
     <string name="pref_Lbreak_after">Long Break After</string>
-    <string name="stats_taskdone_count">Total Task Done : </string>
-    <string name="timer_break_message">BREAK TIME</string>
-    <string name="stats_taskdone_skip">Total Task Skipped:</string>
+
     <string name="undo_text">UNDO</string>
 
 </resources>

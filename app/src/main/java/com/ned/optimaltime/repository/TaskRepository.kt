@@ -1,11 +1,11 @@
-package com.ned.optimaltime.repositories
+package com.ned.optimaltime.repository
 
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
-import com.ned.optimaltime.model.db.AppDatabase
-import com.ned.optimaltime.model.db.TaskDao
-import com.ned.optimaltime.model.entity.Task
+import com.ned.optimaltime.db.AppDatabase
+import com.ned.optimaltime.db.TaskDao
+import com.ned.optimaltime.vo.Task
 
 class TaskRepository(application: Application) {
     private lateinit var taskList: LiveData<List<Task>>
@@ -21,19 +21,23 @@ class TaskRepository(application: Application) {
         insertTaskAsync(taskDao).execute(task)
     }
 
-    fun update(task : Task){
+    fun update(task: Task) {
         updateTaskAsync(taskDao).execute(task)
     }
 
-    fun delete(task: Task){
+    fun delete(task: Task) {
         deleteTaskAsync(taskDao).execute(task)
     }
 
-    fun deleteAllTasks(){
+    fun deleteAllTasks() {
         deleteAllTaskAsync(taskDao).execute()
     }
 
-    fun getAllTasks(): LiveData<List<Task>>{
+    fun getTask(id: Long): Task {
+        return getTaskAsync(taskDao).execute(id).get()
+    }
+
+    fun getAllTasks(): LiveData<List<Task>> {
         return taskList
     }
 
@@ -62,6 +66,15 @@ class TaskRepository(application: Application) {
         override fun doInBackground(vararg params: Void): Void? {
             taskDao.deleteAllTasks()
             return null
+        }
+    }
+
+    private class getTaskAsync constructor(private val taskDao: TaskDao) : AsyncTask<Long, Void, Task>() {
+
+        override fun doInBackground(vararg params: Long?): Task? {
+            return if (params[0] != null)
+                taskDao.getTask(params[0]!!)
+            else null
         }
     }
 }

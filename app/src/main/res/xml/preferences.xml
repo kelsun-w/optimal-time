@@ -9,7 +9,7 @@
 
     <PreferenceCategory
             android:key="pref_timer_lengths"
-            android:title="@string/timer_intervals_setting">
+            android:title="@string/pref_title1">
 
         <DropDownPreference
                 android:key="pref_work_duration"
@@ -37,7 +37,7 @@
         />
         <DropDownPreference
                 android:key="pref_work_before_lbreak"
-                android:title="@string/pref_work_before_Lbreak"
+                android:title="@string/pref_Lbreak_after"
                 android:summary="%s"
                 android:entries="@array/pref_entries_workbefore_lbreak_length"
                 android:entryValues="@array/pref_entries_workbefore_lbreak_length"

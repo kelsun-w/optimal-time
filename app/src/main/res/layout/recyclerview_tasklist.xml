@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
                 android:inputType="textCapSentences"
-                android:hint="@string/addNewTaskPlaceHolder"
+                android:hint="@string/taskf_newtaskplaceholder"
                 android:textColor="@color/placeholder"
                 android:layout_gravity="center"
                 android:layout_marginStart="7dp"
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:scrollbarStyle="insideOverlay"
             android:scrollbars="vertical"
-            android:layout_marginBottom="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/bottom_navbar_size"
     >
 
     </androidx.recyclerview.widget.RecyclerView>

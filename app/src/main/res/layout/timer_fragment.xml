@@ -98,7 +98,7 @@
             app:layout_constraintBottom_toTopOf="@+id/top_guideline"/>
 
     <TextView
-            android:text="@string/timer_break_message"
+            android:text="@string/timerf_breakmsg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:id="@+id/break_msg"
@@ -111,6 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/countdown" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toBottomOf="@+id/progress_countdown"
             app:layout_constraintVertical_weight="0.45" android:gravity="center_horizontal|top"/>
+
     <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
                                                 android:id="@+id/top_guideline"
                                                 android:orientation="horizontal"

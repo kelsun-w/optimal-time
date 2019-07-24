@@ -1,95 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent" android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/bottom_navbar_size">
+    <LinearLayout android:layout_height="wrap_content"
+                  android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:paddingTop="10dp"
+                  android:paddingBottom="10dp"
+                  android:background="@color/backgroundDark">
 
-    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                                android:id="@+id/top_guideline"
-                                                app:layout_constraintGuide_begin="10dp"
-                                                android:orientation="horizontal"/>
-    <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:id="@+id/linearLayout2"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintVertical_chainStyle="spread" app:layout_constraintVertical_weight="0.2"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/divider">
+        <RelativeLayout
+                android:id="@+id/statf_container1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/container_border_shadow"
+                android:padding="10dp">
+            <TextView
+                    android:id="@+id/statfheader1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/statf_header1"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_alignParentTop="true"/>
+            <View
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/backgroundDark"
+                    android:layout_below="@id/statfheader1"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="@color/backgroundDark"
+                    android:showDividers="middle"
+                    android:layout_below="@id/divider1"
+                    android:layout_alignParentBottom="true">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <TextView
+                            android:text="@string/statf_totaltask"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"/>
+                    <TextView
+                            android:id="@+id/statfinterval"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="viewEnd"
+                            tools:text="999999999999999999"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <TextView
+                            android:text="@string/statf_done"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"/>
+                    <TextView
+                            android:id="@+id/statfdone"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="viewEnd"
+                            tools:text="999999999999999999"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <TextView
+                            android:text="@string/statfskiplabel"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"/>
+                    <TextView
+                            android:id="@+id/statfskip"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="viewEnd"
+                            tools:text="999999999999999999"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <TextView
+                            android:text="@string/statf_totalhour"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"/>
+                    <TextView
+                            android:id="@+id/statfhour"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="viewEnd"
+                            tools:text="999999999999999999"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:gravity="center"
-                      android:orientation="horizontal"
-                      android:layout_marginBottom="2dp">
+        <RelativeLayout
+                android:id="@+id/statf_container2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/container_border_shadow">
             <TextView
-                    android:text="@string/stats_taskdone_count"
+                    android:id="@+id/statfheader2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:gravity="center"
-                    tools:layout_editor_absoluteY="84dp" tools:layout_editor_absoluteX="63dp"
-                    android:paddingRight="30dp"
-                    android:textSize="20dp" app:autoSizeMaxTextSize="24sp" app:autoSizeMinTextSize="18sp"/>
-            <TextView
-                    android:id="@+id/total_task_done"
-                    android:text="COUNT HERE"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:gravity="center"
-                    tools:layout_editor_absoluteY="84dp" tools:layout_editor_absoluteX="63dp"
-                    android:textSize="20dp" app:autoSizeMaxTextSize="24sp" app:autoSizeMinTextSize="18sp"/>
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="@string/statf_header2"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_alignParentTop="true"/>
+            <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/backgroundDark"
+                    android:layout_below="@id/statfheader2"/>
+            <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/statf_tab1"
+                    app:tabRippleColor="@android:color/transparent"
+                    app:tabSelectedTextColor="@color/colorPrimaryDark"
+                    app:tabMode="scrollable"
+                    app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:tabIndicator="@drawable/tab_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/divider2">
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:gravity="center"
-                      android:orientation="horizontal">
+            </com.google.android.material.tabs.TabLayout>
+
+            <!--<TextView-->
+            <!--android:id="@+id/statfselectdate1label"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/statf_selectdate1"-->
+            <!--android:layout_below="@+id/statfselecttasklabel"/>-->
+            <!--<TextView-->
+            <!--android:id="@+id/statfselectdate1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@+id/statfselectdate1label"-->
+            <!--android:layout_toEndOf="@+id/statfselecttasklabel"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--tools:text="25/01/1999"/>-->
+            <!--<TextView-->
+            <!--android:id="@+id/statfselectdate2label"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/statf_selectdate2"-->
+            <!--android:layout_below="@id/statfselecttasklabel"-->
+            <!--android:layout_toEndOf="@id/statfselectdate1"/>-->
+            <!--<TextView-->
+            <!--android:id="@+id/statfselectdate2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@+id/statfselectdate1label"-->
+            <!--android:layout_toEndOf="@+id/statfselectdate2label"-->
+            <!--android:layout_alignEnd="@id/statfselecttask"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--tools:text="19/07/2019"/>-->
+
+            <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/statf_tab2"
+                    android:layout_width="300dp"
+                    android:layout_height="@dimen/tab_size"
+                    android:layout_below="@id/statf_tab1"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/tab_background"
+                    app:tabSelectedTextColor="@android:color/white"
+                    app:tabIndicator="@drawable/tab_indicator"
+                    app:tabRippleColor="@android:color/transparent">
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/statf_sort1"/>
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/statf_sort2"/>
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/statf_sort3"/>
+            </com.google.android.material.tabs.TabLayout>
+            <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/statfhistory_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_below="@id/statf_tab2" android:layout_marginTop="-7dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/statf_container3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/container_border_shadow">
             <TextView
-                    android:text="@string/stats_taskdone_skip"
+                    android:id="@+id/statfheader3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:gravity="center"
-                    tools:layout_editor_absoluteY="84dp" tools:layout_editor_absoluteX="63dp"
-                    android:paddingRight="30dp"
-                    android:textSize="20dp" app:autoSizeMaxTextSize="24sp" app:autoSizeMinTextSize="18sp"/>
-            <TextView
-                    android:id="@+id/total_task_skipped"
-                    android:text="COUNT HERE"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:gravity="center"
-                    tools:layout_editor_absoluteY="84dp" tools:layout_editor_absoluteX="63dp"
-                    android:textSize="20dp" app:autoSizeMinTextSize="18sp" app:autoSizeMaxTextSize="24sp"/>
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="@string/statf_header3"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_alignParentTop="true"/>
+            <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/backgroundDark"
+                    android:layout_below="@id/statfheader3"/>
+            <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/statf_tab3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/divider3">
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/statf_distselect1"/>
+
+                <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/statf_distselect2"/>
+
+            </com.google.android.material.tabs.TabLayout>
+            <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/sdistribtion_pie"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_below="@id/statf_tab3"/>
+        </RelativeLayout>
+
     </LinearLayout>
-
-    <View style="@style/Divider"
-          android:id="@+id/divider"
-          android:layout_height="0dp"
-          android:layout_width="0dp"
-          android:layout_marginBottom="8dp"
-          app:layout_constraintBottom_toTopOf="@+id/pieChart" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-          app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-          android:layout_marginStart="8dp" app:layout_constraintVertical_weight="0.01"/>
-
-    <com.github.mikephil.charting.charts.PieChart android:layout_width="0dp"
-                                                  android:id="@+id/pieChart"
-                                                  android:layout_marginBottom="8dp"
-                                                  app:layout_constraintBottom_toBottomOf="@+id/bottom_guideline"
-                                                  app:layout_constraintTop_toBottomOf="@+id/divider"
-                                                  app:layout_constraintVertical_weight="0.7"
-                                                  android:layout_marginEnd="2dp"
-                                                  app:layout_constraintEnd_toEndOf="parent"
-                                                  android:layout_marginStart="2dp"
-                                                  app:layout_constraintStart_toStartOf="parent"
-                                                  android:layout_marginTop="10dp"
-                                                  android:minHeight="350dp"
-                                                  android:minWidth="350dp" android:layout_height="0dp"
-                                                  app:layout_constraintDimensionRatio="4:4">
-
-    </com.github.mikephil.charting.charts.PieChart>
-    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                                android:id="@+id/bottom_guideline"
-                                                android:orientation="horizontal"
-                                                app:layout_constraintGuide_end="?attr/actionBarSize"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

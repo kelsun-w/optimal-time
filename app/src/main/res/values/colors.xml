@@ -3,6 +3,8 @@
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#00BCD4</color>
+    <color name="background">#FFFFFF</color>
+    <color name="backgroundDark">#EAEAEA</color>
 
     <color name="a1">#44B3C2</color>
     <color name="a2">#F1A94E</color>
@@ -10,6 +12,8 @@
     <color name="a4">#5D4C46</color>
     <color name="a5">#7B8D8E</color>
     <color name="a6">#F2EDD8</color>
+
+    <color name="tab_selected">#FFF</color>
 
     <color name="placeholder">#FFD493</color>
 

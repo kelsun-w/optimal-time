@@ -2,7 +2,7 @@ package com.ned.optimaltime.binding
 
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ned.optimaltime.model.entity.AppEntity
+import com.ned.optimaltime.vo.AppEntity
 
 abstract class DiffAdapter <T : AppEntity, VH: RecyclerView.ViewHolder> : ListAdapter<T, VH>(callbackProducer.setupCallback<T>()) {
 

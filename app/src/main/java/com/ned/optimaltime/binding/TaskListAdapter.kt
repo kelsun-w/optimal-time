@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ned.optimaltime.R
-import com.ned.optimaltime.model.entity.Task
+import com.ned.optimaltime.vo.Task
 import kotlinx.android.synthetic.main.task_item_row.view.*
 
 class TaskListAdapter() :
@@ -22,7 +22,7 @@ class TaskListAdapter() :
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.taskName.text = getItemAt(position).name
-//        holder.doneCount.text = getItemAt(position).done.toString()
+        holder.taskProgress.text = getItemAt(position).done.toString()
 
         holder.task_start_btn.setOnClickListener {
             listener.onItemClicked(getItemAt(holder.adapterPosition))
@@ -36,14 +36,14 @@ class TaskListAdapter() :
     /**
      * Return an item from the List Adapter's data array at the specified position
      */
-    fun getItemAt(position : Int) : Task {
+    fun getItemAt(position: Int): Task {
         return getItem(position)
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val task = itemView.findViewById<ViewGroup>(R.id.taskrow) //<<----
         val task_start_btn = task.findViewById<ImageView>(R.id.task_startbutton)
-
+        val taskProgress = task.findViewById<TextView>(R.id.task_progress)
         val taskName: TextView = task.task_name
 //        val doneCount = task.task_progress
     }
